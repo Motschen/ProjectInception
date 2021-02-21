@@ -12,23 +12,26 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
-public class TaterwebzBlockEntityRenderer extends BlockEntityRenderer<TaterwebzBlockEntity> {
+public class TaterwebzBlockEntityRenderer implements BlockEntityRenderer<TaterwebzBlockEntity> {
 
     private static final SpriteIdentifier GENERIC = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, new Identifier(ProjectInception.MODID, "block/generic"));
     private Sprite pointerSprite;
 
     public TaterwebzBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+        super();
+    }
+    public TaterwebzBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
     @Override
@@ -47,7 +50,7 @@ public class TaterwebzBlockEntityRenderer extends BlockEntityRenderer<TaterwebzB
         Identifier textureId = blockEntity.getGameInstance().getLastTextureId();
 
         Direction direction = blockEntity.getCachedState().get(GameBlock.FACING);
-        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-direction.asRotation()));
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-direction.asRotation()));
         if (direction.equals(Direction.SOUTH) || direction.equals(Direction.EAST)) {
             matrixStack.translate(-Math.abs(direction.getOffsetX()), 0, 1);
         } else {

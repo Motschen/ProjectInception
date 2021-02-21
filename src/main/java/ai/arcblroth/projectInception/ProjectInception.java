@@ -6,6 +6,7 @@ import ai.arcblroth.projectInception.item.InceptionInterfaceItem;
 import ai.arcblroth.projectInception.util.RecipeYeeter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -56,7 +57,7 @@ public class ProjectInception implements ModInitializer {
 		GAME_BLOCK = Registry.register(Registry.BLOCK, new Identifier(MODID, "game_block"),
 				new GameBlock(AbstractBlock.Settings.of(Material.METAL).strength(2).nonOpaque().emissiveLighting((s, v, w) -> true)));
 		GAME_BLOCK_ENTITY_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "game_block"),
-				BlockEntityType.Builder.create(GameBlockEntity::new, GAME_BLOCK).build(null));
+				FabricBlockEntityTypeBuilder.create(GameBlockEntity::new, GAME_BLOCK).build(null));
 		GAME_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(MODID, "game_block"),
 				new BlockItemWithMagicness(GAME_BLOCK, new Item.Settings().group(STUFF).rarity(Rarity.RARE), false, true));
 		INCEPTION_INTERFACE_ITEM = Registry.register(Registry.ITEM, new Identifier(MODID, "inception_interface"),
@@ -66,7 +67,7 @@ public class ProjectInception implements ModInitializer {
 		TATERWEBZ_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(MODID, "taterwebz_block"),
 				new BlockItemWithMagicness(TATERWEBZ_BLOCK, new Item.Settings().group(STUFF).rarity(Rarity.RARE), false, true));
 		TATERWEBZ_BLOCK_ENTITY_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "taterwebz_block"),
-				BlockEntityType.Builder.create(TaterwebzBlockEntity::new, TATERWEBZ_BLOCK).build(null));
+				FabricBlockEntityTypeBuilder.create(TaterwebzBlockEntity::new, TATERWEBZ_BLOCK).build(null));
 
 		if(FabricLoader.getInstance().isModLoaded("techreborn")) {
 			RecipeYeeter.yeetRecipe(RecipeYeeter.USE_TECHREBORN_RECIPES, new Identifier(MODID, "inception_block_vanilla"));

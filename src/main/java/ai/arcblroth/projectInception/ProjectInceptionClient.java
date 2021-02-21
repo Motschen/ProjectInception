@@ -6,7 +6,7 @@ import ai.arcblroth.projectInception.client.TaterwebzBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.openhft.chronicle.queue.ChronicleQueue;
 import org.lwjgl.glfw.GLFW;
 

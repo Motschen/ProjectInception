@@ -2,13 +2,13 @@ package ai.arcblroth.projectInception.block;
 
 import ai.arcblroth.projectInception.client.AbstractGameInstance;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 
-public abstract class AbstractDisplayBlockEntity<T extends AbstractDisplayBlockEntity<T>> extends BlockEntity implements Tickable, BlockEntityClientSerializable {
+public abstract class AbstractDisplayBlockEntity<T extends AbstractDisplayBlockEntity<T>> extends BlockEntity implements BlockEntityClientSerializable {
 
     private final Class<T> selfType;
     protected GameMultiblock<T> multiblock;
@@ -20,8 +20,8 @@ public abstract class AbstractDisplayBlockEntity<T extends AbstractDisplayBlockE
     protected boolean isController = false;
     protected boolean isOn = false;
 
-    public AbstractDisplayBlockEntity(BlockEntityType<?> type, Class<T> selfType) {
-        super(type);
+    public AbstractDisplayBlockEntity(BlockEntityType<?> type, Class<T> selfType, BlockPos blockPos, BlockState blockState) {
+        super(type, blockPos, blockState);
         this.selfType = selfType;
     }
 

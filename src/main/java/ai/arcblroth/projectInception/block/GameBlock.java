@@ -21,8 +21,8 @@ public class GameBlock extends AbstractDisplayBlock<GameBlockEntity> {
     }
 
     @Override
-    public GameBlockEntity createDisplayBlockEntity(BlockView world) {
-        return new GameBlockEntity();
+    public GameBlockEntity createDisplayBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new GameBlockEntity(blockPos,blockState);
     }
 
     @Override
@@ -35,10 +35,12 @@ public class GameBlock extends AbstractDisplayBlock<GameBlockEntity> {
     @Environment(EnvType.CLIENT)
     public void clickClient(GameBlockEntity ge, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, double hitX, double hitY) {
         if (player.getStackInHand(hand).getItem() instanceof InceptionInterfaceItem) {
-            MinecraftClient.getInstance().openScreen(new InceptionInterfaceScreen(ge));
+            AbstractDisplayBlockEntity be = (AbstractDisplayBlockEntity) world.getBlockEntity(ge.controllerBlockPos);
+            MinecraftClient.getInstance().openScreen(new InceptionInterfaceScreen(be));
             player.sendMessage(new TranslatableText("message.project_inception.escape", ProjectInceptionClient.EXIT_INNER_LOCK.getBoundKeyLocalizedText()), true);
         } else {
-            ge.getGameInstance().click(hitX, hitY);
+            AbstractDisplayBlockEntity be = (AbstractDisplayBlockEntity) world.getBlockEntity(ge.controllerBlockPos);
+            be.getGameInstance().click(hitX, hitY);
         }
     }
 

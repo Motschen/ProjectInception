@@ -18,7 +18,6 @@ import java.util.Optional;
 
 public class ProjectInceptionConfigScreen implements ModMenuApi {
 
-    @Override
     public String getModId() {
         return ProjectInception.MODID;
     }

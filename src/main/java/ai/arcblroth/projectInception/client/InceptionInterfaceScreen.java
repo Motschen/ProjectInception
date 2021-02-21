@@ -41,7 +41,7 @@ public class InceptionInterfaceScreen extends Screen {
     public void tick() {
         // exact variable testing intentional
         if(ProjectInceptionClient.focusedInstance != gameInstance || !blockEntity.isOn()
-        || !this.client.player.isAlive() || this.client.player.removed) {
+        || !this.client.player.isAlive() || this.client.player.isRemoved()) {
             this.client.openScreen(null);
         }
     }

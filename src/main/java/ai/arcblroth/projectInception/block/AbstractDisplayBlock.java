@@ -40,11 +40,11 @@ public abstract class AbstractDisplayBlock<T extends AbstractDisplayBlockEntity>
     }
 
     @Override
-    public final BlockEntity createBlockEntity(BlockView world) {
-        return createDisplayBlockEntity(world);
+    public final BlockEntity createBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return createDisplayBlockEntity(blockPos, blockState);
     }
 
-    public abstract T createDisplayBlockEntity(BlockView world);
+    public abstract T createDisplayBlockEntity(BlockPos blockPos, BlockState blockState);
 
     @Override
     @SuppressWarnings("unchecked")

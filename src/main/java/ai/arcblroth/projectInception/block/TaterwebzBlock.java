@@ -23,8 +23,8 @@ public class TaterwebzBlock extends AbstractDisplayBlock<TaterwebzBlockEntity> {
     }
 
     @Override
-    public TaterwebzBlockEntity createDisplayBlockEntity(BlockView world) {
-        return new TaterwebzBlockEntity();
+    public TaterwebzBlockEntity createDisplayBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new TaterwebzBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -37,7 +37,8 @@ public class TaterwebzBlock extends AbstractDisplayBlock<TaterwebzBlockEntity> {
     @Environment(EnvType.CLIENT)
     public void clickClient(TaterwebzBlockEntity te, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, double hitX, double hitY) {
         if (player.getStackInHand(hand).getItem() instanceof InceptionInterfaceItem) {
-            MinecraftClient.getInstance().openScreen(new InceptionInterfaceScreen(te));
+            AbstractDisplayBlockEntity be = (AbstractDisplayBlockEntity) world.getBlockEntity(te.controllerBlockPos);
+            MinecraftClient.getInstance().openScreen(new InceptionInterfaceScreen(be));
             player.sendMessage(new TranslatableText("message.project_inception.escape", ProjectInceptionClient.EXIT_INNER_LOCK.getBoundKeyLocalizedText()), true);
         } else {
             if(player.isSneaking() && te.getControllerBlockPos() != null) {
@@ -46,7 +47,8 @@ public class TaterwebzBlock extends AbstractDisplayBlock<TaterwebzBlockEntity> {
                     MinecraftClient.getInstance().openScreen(new TaterwebzControlScreen((TaterwebzBlockEntity) beController));
                 }
             } else {
-                te.getGameInstance().click(hitX, hitY);
+                AbstractDisplayBlockEntity be = (AbstractDisplayBlockEntity) world.getBlockEntity(te.controllerBlockPos);
+                be.getGameInstance().click(hitX, hitY);
             }
         }
     }

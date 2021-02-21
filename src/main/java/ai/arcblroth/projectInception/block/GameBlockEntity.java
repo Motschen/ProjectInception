@@ -2,18 +2,20 @@ package ai.arcblroth.projectInception.block;
 
 import ai.arcblroth.projectInception.ProjectInception;
 import ai.arcblroth.projectInception.client.mc.MinecraftGameInstance;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 
 public class GameBlockEntity extends AbstractDisplayBlockEntity<GameBlockEntity> {
 
     private MinecraftGameInstance gameInstance = null;
 
-    public GameBlockEntity() {
-        super(ProjectInception.GAME_BLOCK_ENTITY_TYPE, GameBlockEntity.class);
+    public GameBlockEntity(BlockPos pos, BlockState state) {
+        super(ProjectInception.GAME_BLOCK_ENTITY_TYPE, GameBlockEntity.class, pos, state);
     }
 
     @Override

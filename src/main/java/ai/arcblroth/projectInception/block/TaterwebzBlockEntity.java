@@ -2,14 +2,16 @@ package ai.arcblroth.projectInception.block;
 
 import ai.arcblroth.projectInception.ProjectInception;
 import ai.arcblroth.projectInception.client.taterwebz.TaterwebzInstance;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class TaterwebzBlockEntity extends AbstractDisplayBlockEntity<TaterwebzBlockEntity> {
 
     private TaterwebzInstance instance = null;
 
-    public TaterwebzBlockEntity() {
-        super(ProjectInception.TATERWEBZ_BLOCK_ENTITY_TYPE, TaterwebzBlockEntity.class);
+    public TaterwebzBlockEntity(BlockPos pos, BlockState state) {
+        super(ProjectInception.TATERWEBZ_BLOCK_ENTITY_TYPE, TaterwebzBlockEntity.class, pos, state);
     }
 
     @Override

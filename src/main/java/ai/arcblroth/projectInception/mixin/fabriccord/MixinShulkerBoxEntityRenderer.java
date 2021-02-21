@@ -25,7 +25,7 @@ public class MixinShulkerBoxEntityRenderer {
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "net/minecraft/client/util/SpriteIdentifier.getVertexConsumer(Lnet/minecraft/client/render/VertexConsumerProvider;Ljava/util/function/Function;)Lnet/minecraft/client/render/VertexConsumer;"))
     private VertexConsumer getVertexConsumer(SpriteIdentifier spriteIdentifier, VertexConsumerProvider vertexConsumerProvider, Function<Identifier, RenderLayer> layerFactory) {
         return new SpriteTexturedVertexConsumer(
-                ItemRenderer.getDirectGlintVertexConsumer(
+                ItemRenderer.getItemGlintConsumer(
                         vertexConsumerProvider,
                         spriteIdentifier.getRenderLayer(layerFactory),
                         false,

@@ -1,7 +1,7 @@
 package ai.arcblroth.taterwebz.util;
 
-import net.fabricmc.loader.transformer.accesswidener.AccessWidener;
-import net.fabricmc.loader.transformer.accesswidener.AccessWidenerVisitor;
+import net.fabricmc.accesswidener.AccessWidener;
+import net.fabricmc.accesswidener.AccessWidenerVisitor;
 import org.apache.commons.io.IOUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -104,7 +104,7 @@ public class NotKnotClassLoader extends URLClassLoader {
                         }
                         ClassWriter writer = new ClassWriter(0);
                         if(accessWidener != null) {
-                            node.accept(new AccessWidenerVisitor(Opcodes.ASM8, writer, accessWidener));
+                            node.accept(AccessWidenerVisitor.createClassVisitor(Opcodes.ASM8, writer, accessWidener));
                         } else {
                             node.accept(writer);
                         }

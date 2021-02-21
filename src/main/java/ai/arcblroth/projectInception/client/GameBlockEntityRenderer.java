@@ -12,24 +12,27 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
-public class GameBlockEntityRenderer extends BlockEntityRenderer<GameBlockEntity> {
+public class GameBlockEntityRenderer implements BlockEntityRenderer<GameBlockEntity> {
 
     private static final SpriteIdentifier LOADING = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, new Identifier(ProjectInception.MODID, "block/inception"));
     private static final SpriteIdentifier GENERIC = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, new Identifier(ProjectInception.MODID, "block/generic"));
     private Sprite pointerSprite;
 
     public GameBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+        super();
+    }
+    public GameBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
     @Override
@@ -50,7 +53,7 @@ public class GameBlockEntityRenderer extends BlockEntityRenderer<GameBlockEntity
                 ? vertexConsumers.getBuffer(RenderLayer.getText(textureId))
                 : LOADING.getVertexConsumer(vertexConsumers, RenderLayer::getText);
         Direction direction = blockEntity.getCachedState().get(GameBlock.FACING);
-        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-direction.asRotation()));
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-direction.asRotation()));
         if (direction.equals(Direction.SOUTH) || direction.equals(Direction.EAST)) {
             matrixStack.translate(-Math.abs(direction.getOffsetX()), 0, 1);
         } else {
